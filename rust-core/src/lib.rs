@@ -1,14 +1,19 @@
-pub fn add(left: u64, right: u64) -> u64 {
-    left + right
-}
+////////////////////////////////////////////////////////////////////////////////
+/// @file       lib.rs
+/// @author     Krisna Pranav
+/// @date       April 3, 2026
+/// @license    MIT License
+/// @copyright  Copyright (c) 2026 Krisna Pranav
+///
+/// @brief      Main library entry point and public API for the hit core.
+///
+/// @details    This module serves as the primary entry point for the hit core
+///             library, exposing the public API and re-exporting essential
+///             components. It coordinates the various submodules including
+///             error handling and core functionality. All public interfaces
+///             are defined and documented here for external consumption.
+///
+////////////////////////////////////////////////////////////////////////////////
 
-#[cfg(test)]
-mod tests {
-    use super::*;
+pub mod error;
 
-    #[test]
-    fn it_works() {
-        let result = add(2, 2);
-        assert_eq!(result, 4);
-    }
-}
