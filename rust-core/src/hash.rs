@@ -30,3 +30,28 @@ pub fn hash_str(data: &str) -> String {
 pub fn verify_hash(data: &[u8], expected: &str) -> bool {
     hash_bytes(data) == expected
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_hash_determinism() {
+        let h1 = hash_str("hello world");
+        let h2 = hash_str("hello world");
+        assert_eq!(h1, h2);
+    }
+
+    #[test]
+    fn test_hash_uniqueness() {
+        assert_ne!(hash_str("foo"), hash_str("bar"));
+    }
+
+    #[test]
+    fn test_verify_hash() {
+        let data = b"test content";
+        let h = hash_bytes(data);
+        assert!(verify_hash(data, &h));
+        assert!(!verify_hash(b"other", &h));
+    }
+}
