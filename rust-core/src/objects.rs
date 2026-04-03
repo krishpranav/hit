@@ -64,6 +64,33 @@ pub struct Commit {
 }
 
 impl Commit {
+    pub fn new(
+        parent_hashes: Vec<String>,
+        root_tree_hash: String,
+        author: String,
+        message: String,
+        signature: String,
+        timestamp: i64,
+    ) -> Self {
+        let payload = format!(
+            "{}|{}|{}|{}|{}",
+            parent_hashes.join(","),
+            root_tree_hash,
+            author,
+            message,
+            timestamp
+        );
+        let hash = hash_bytes(payload.as_bytes());
+        Self {
+            hash,
+            parent_hashes,
+            root_tree_hash,
+            author,
+            message,
+            signature,
+            timestamp,
+        }
+    }
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
