@@ -14,3 +14,32 @@
 ///             for seamless integration with Rust's error handling ecosystem.
 ///
 ////////////////////////////////////////////////////////////////////////////////
+
+use thiserror::Error;
+
+#[derive(Debug, Error)]
+pub enum HitError {
+    #[error("Object not found: {hash}")]
+    ObjectNotFound { hash: String },
+
+    #[error("Invalid hash: expected {expected}, got {actual}")]
+    HashMismatch { expected: String, actual: String },
+
+    #[error("DAG validation failed: {reason}")]
+    DagValidationFailed { reason: String },
+
+    #[error("Merge conflict at path: {path}")]
+    MergeConflict { path: String },
+
+    #[error("Serialization error: {0}")]
+    SerializationError(#[from] serde_json::Error),
+
+    #[error("IO error: {0}")]
+    IoError(#[from] std::io::Error),
+
+    #[error("Signature verification failed")]
+    SignatureInvalid,
+
+    #[error("Unauthorized: {0}")]
+    Unauthorized(String),
+}
