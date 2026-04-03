@@ -1,6 +1,27 @@
 [package]
-name = "rust-core"
+name = "hit-core"
 version = "0.1.0"
-edition = "2024"
+edition = "2021"
+authors = ["HIT Team"]
+description = "HIT Core Engine — DAG, hashing, merge logic"
+
+[lib]
+name = "hit_core"
+path = "src/lib.rs"
 
 [dependencies]
+sha2 = "0.10"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+hex = "0.4"
+thiserror = "1"
+uuid = { version = "1", features = ["v4"] }
+chrono = { version = "0.4", features = ["serde"] }
+rayon = "1.8"
+bytes = "1"
+tokio = { version = "1", features = ["full"] }
+tracing = "0.1"
+tracing-subscriber = "0.3"
+
+[dev-dependencies]
+tempfile = "3"
