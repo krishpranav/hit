@@ -18,3 +18,4 @@
 pub mod error;
 pub mod hash;
 mod objects;
+mod dag;
